@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import Profile from './profile/profile'
 
 class App extends Component {
 
@@ -8,7 +8,7 @@ class App extends Component {
         return (
 
             <div className='App'>
-                <h1>Hello React, You are Awesome.</h1>
+                <Profile />
             </div>
 
         );
