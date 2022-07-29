@@ -3,51 +3,71 @@ import React, { Component } from "react";
 
 class App extends Component {
 
-    // // es5 declaration of properties and State
-    // constructor(props) {
-    //     super(props)
-    //     this.count = 0
-
-    //     this.state = {
-    //         count: 0
-    //     }
-    // }
-
-    //es6 Declaration of properties and State
-
-    count = 0;
     state = {
-        count: 0,
-        lotsOfProperties: {}
-    };
+        count: 0
+    }
 
+    intervalId = null;
+
+
+    decrementCount = () => {
+        if (this.state.count > 0) {
+            this.setState({ count: this.state.count - 1 })
+        }
+    }
+    incrementCount = () => {
+        this.setState({ count: this.state.count + 1 })
+    }
+
+    startTimer = () => {
+        if (this.state.count > 0 && !this.intervalId) {
+            this.intervalId = setInterval(() => {
+                this.setState({ count: this.state.count - 1 }, () => {
+                    if (this.state.count === 0) {
+                        alert('Counter Finished')
+                        clearInterval(this.intervalId)
+                        this.intervalId = null
+                    }
+                })
+
+            }, 1000)
+        }
+    }
+
+    stopTimer = () => {
+        if (this.intervalId) {
+            clearInterval(this.intervalId)
+            this.intervalId = null
+        }
+    }
+
+    resetTimer = () => {
+        this.setState({ count: 0 })
+        clearInterval(this.intervalId)
+        this.intervalId = null
+    }
 
 
     render() {
-        console.log(this.count)
+
         return (
             <div className="App">
-                <h1>Why do we need State???</h1>
-                <h1>Count = {this.state.count}</h1>
-                <button onClick={() => {
-                    // this.count++
-                    // this.setState({})
-                    // this.setState({ count: this.state.count + 1 })
-                    this.setState(prev => {
-                        return {
-                            count: prev.count + 1
-                        };
-                    }, () => {
-                        console.log(this.state.count)
-                    })
-                    // this.state.count = this.state.count + 1;
-                    // console.log(this.state.count + 1, "clicked")
-                }}> Increment Count </button>
-            </div >
+                <h1 className="Heading">Simple Timer</h1>
+                <div className="Container">
+                    <button className="btn" onClick={this.decrementCount}>-</button>
+                    <span className="Text">{this.state.count}</span>
+                    <button className="btn" onClick={this.incrementCount}>+</button>
+                </div>
+                <div>
+                    <button onClick={this.startTimer} className="btn" >Start</button>
+                    <button onClick={this.stopTimer} className="btn">Stop</button>
+                    <button onClick={this.resetTimer} className="btn">Reset</button>
+                </div>
+            </div>
         )
 
     }
-}
 
+}
 
 export default App;
