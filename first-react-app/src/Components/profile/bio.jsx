@@ -1,12 +1,12 @@
 import React from "react";
 
 
-const Bio = () => {
+const Bio = (props) => {
 
     return (
         <div className="Bio">
-            <h3>Abul Bashar</h3>
-            <p>Front End Developer, Student</p>
+            <h3>{props.name}</h3>
+            <p>{props.title}</p>
         </div>
 
     );

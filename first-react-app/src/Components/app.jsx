@@ -1,18 +1,33 @@
-import React, { Component } from "react";
-import Profile from './profile/profile'
+import React from "react";
 
-class App extends Component {
+
+
+class Child extends React.Component {
 
     render() {
+        this.props.func(this)
+        return <h1>I am Child</h1>
 
-        return (
+    }
 
-            <div className='App'>
-                <Profile />
-            </div>
-
-        );
-    };
 }
+
+class App extends React.Component {
+
+    getContext(context) {
+        console.log(context)
+    }
+    render() {
+        this.getContext(this)
+        return (
+            <div className="App">
+                <h1>Pass Function as Props</h1>
+                <Child func={this.getContext} />
+            </div>
+        );
+    }
+
+
+};
 
 export default App;
