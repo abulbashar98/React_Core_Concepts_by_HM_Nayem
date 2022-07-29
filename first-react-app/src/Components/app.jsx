@@ -17,8 +17,11 @@ class App extends Component {
 
     count = 0;
     state = {
-        count: 0
-    }
+        count: 0,
+        lotsOfProperties: {}
+    };
+
+
 
     render() {
         console.log(this.count)
@@ -28,10 +31,19 @@ class App extends Component {
                 <h1>Count = {this.state.count}</h1>
                 <button onClick={() => {
                     // this.count++
-                    this.setState({ count: this.state.count + 1 })
-                    console.log(this.state.count + 1, "clicked")
+                    // this.setState({})
+                    // this.setState({ count: this.state.count + 1 })
+                    this.setState(prev => {
+                        return {
+                            count: prev.count + 1
+                        };
+                    }, () => {
+                        console.log(this.state.count)
+                    })
+                    // this.state.count = this.state.count + 1;
+                    // console.log(this.state.count + 1, "clicked")
                 }}> Increment Count </button>
-            </div>
+            </div >
         )
 
     }
