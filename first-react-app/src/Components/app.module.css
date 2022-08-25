@@ -1,0 +1,28 @@
+body {
+    text-align: center;
+}
+
+.btn {
+    padding: 15px;
+    border-radius: 25px;
+    border: 0;
+    background-color: cyan;
+    color: black;
+}
+
+.textField {
+
+    margin: 15px 0;
+    padding: 10px;
+    width: 50%;
+}
+
+.CheckStyle {
+    width: 50%;
+    padding: 10px;
+    margin: 15px 0;
+    background-color: yellow;
+    color: blue;
+    font-size: 22px;
+    font-style: italic;
+}

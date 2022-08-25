@@ -1,73 +1,72 @@
-import React, { Component } from "react";
+import React from "react";
+import classes from './app.module.css'
 
 
-class App extends Component {
+class App extends React.Component {
 
     state = {
-        count: 0
+        name: ''
     }
 
-    intervalId = null;
 
+    handleButtonClick = (event) => {
+        console.log(event);
+        console.log(event.target);
+    }
 
-    decrementCount = () => {
-        if (this.state.count > 0) {
-            this.setState({ count: this.state.count - 1 })
+    handleEventChange = event => {
+        console.log(event.target.value)
+        this.setState({ name: event.target.value })
+        console.log(this.state)
+    }
+    handleCheckChange = event => {
+        this.setState({ name: event.target.value })
+        console.log(event.target.values)
+    }
+
+    handleFocusEvent = event => {
+        console.log('Focus Event happened with onFocus Handler')
+    }
+
+    handleBlurEvent = () => {
+        if (!this.state.name) {
+            alert('Please input your name')
         }
-    }
-    incrementCount = () => {
-        this.setState({ count: this.state.count + 1 })
-    }
-
-    startTimer = () => {
-        if (this.state.count > 0 && !this.intervalId) {
-            this.intervalId = setInterval(() => {
-                this.setState({ count: this.state.count - 1 }, () => {
-                    if (this.state.count === 0) {
-                        alert('Counter Finished')
-                        clearInterval(this.intervalId)
-                        this.intervalId = null
-                    }
-                })
-
-            }, 1000)
-        }
-    }
-
-    stopTimer = () => {
-        if (this.intervalId) {
-            clearInterval(this.intervalId)
-            this.intervalId = null
-        }
-    }
-
-    resetTimer = () => {
-        this.setState({ count: 0 })
-        clearInterval(this.intervalId)
-        this.intervalId = null
+        console.log('Blur event happened with onBlur event handler')
     }
 
 
     render() {
 
         return (
-            <div className="App">
-                <h1 className="Heading">Simple Timer</h1>
-                <div className="Container">
-                    <button className="btn" onClick={this.decrementCount}>-</button>
-                    <span className="Text">{this.state.count}</span>
-                    <button className="btn" onClick={this.incrementCount}>+</button>
-                </div>
-                <div>
-                    <button onClick={this.startTimer} className="btn" >Start</button>
-                    <button onClick={this.stopTimer} className="btn">Stop</button>
-                    <button onClick={this.resetTimer} className="btn">Reset</button>
-                </div>
+            <div>
+                <h1>Handling Events In React</h1>
+                <button className={classes.btn} onClick={this.handleButtonClick}>Click me</button>
+                <br />
+                <input
+                    type="text"
+                    value={this.state.name}
+                    placeholder="Enter Some Text, I can read Changes"
+                    className={classes.textField}
+                    onChange={this.handleEventChange}
+                />
+                <br />
+                <input
+                    type="text"
+                    placeholder="checking module"
+                    className={classes.CheckStyle}
+                    onChange={this.handleCheckChange}
+                    onFocus={this.handleFocusEvent}
+                    onBlur={this.handleBlurEvent}
+                />
+                <br />
+                <br />
+                {this.state.name && <h2>Welcome, {this.state.name}</h2>}
+
             </div>
         )
 
     }
-
 }
 
 export default App;
