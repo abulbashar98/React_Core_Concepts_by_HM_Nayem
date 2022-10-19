@@ -1,7 +1,6 @@
 import React from 'react'
 import './inputs.css'
 
-
 class App extends React.Component {
 
     state = {
