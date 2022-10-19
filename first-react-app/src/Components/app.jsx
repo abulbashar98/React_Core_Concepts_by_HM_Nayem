@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Inputs from './Inputs/Inputs'
 
 class App extends React.Component {
