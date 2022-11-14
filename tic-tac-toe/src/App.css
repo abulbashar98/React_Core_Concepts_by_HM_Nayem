@@ -16,7 +16,12 @@ ul {
   padding-left: 30px;
 }
 
-.border-row:after {
+.board-placement {
+  display: flex;
+  flex-direction: column;
+}
+
+.border-row::after {
   clear: both;
   content: '';
   display: table;
