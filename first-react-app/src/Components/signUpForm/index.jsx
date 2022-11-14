@@ -39,7 +39,7 @@ class SignUpForm extends React.Component {
         console.log(isValid)
 
         if (isValid) {
-
+            this.props.createUser(this.state.values)
             event.target.reset()
             this.setState({ values: initialStateValue, errors, agreement: false })
             console.log(this.state)
