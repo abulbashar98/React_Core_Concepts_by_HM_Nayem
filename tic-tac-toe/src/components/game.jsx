@@ -58,6 +58,16 @@ class Game extends React.Component {
 
     }
 
+    jumpTo = step => {
+        this.setState({
+            stepCount: step,
+            xIsNext: step % 2 === 0
+        })
+    }
+
+
+
+
 
     render() {
 
@@ -67,15 +77,42 @@ class Game extends React.Component {
         console.log(winner)
 
 
+        const moves = history.map((_, move) => {
+
+            const description = move ? "Go to Move #" + move : "Go to start"
+
+            return (
+
+                <li key={move}>
+                    <button onClick={() => this.jumpTo(move)}>{description}</button>
+                </li>
+
+            )
+        })
+
+        let status = ''
+        if (winner) {
+            status = "Winner: " + winner
+        }
+        else {
+            status = "Next Player " + (this.state.xIsNext ? "X" : "O")
+        }
 
         return (
-            <div>
-                <h2>Game Component</h2>
-                <Board
-                    squares={current.squares}
-                    onClick={this.handleClick}
-                />
-            </div>
+            <div className="game">
+                <div className="game-board">
+                    <Board
+                        squares={current.squares}
+                        onClick={this.handleClick}
+                    ></Board>
+                </div>
+                <div className="game-info">
+                    <div>{status}</div>
+                    <ol>
+                        {moves}
+                    </ol>
+                </div>
+            </div >
         )
 
 
